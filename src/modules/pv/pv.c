@@ -199,6 +199,28 @@ static pv_export_t mod_pvs[] = {
 			PVT_OTHER, pv_get_errinfo_attr, 0, 0, 0, pv_init_iname, 3},
 	{{"err.rreason", (sizeof("err.rreason") - 1)}, /* */
 			PVT_OTHER, pv_get_errinfo_attr, 0, 0, 0, pv_init_iname, 4},
+	{{"En", (sizeof("En") - 1)}, /* */
+			PVT_OTHER, pv_get_escstr, 0, 0, 0, pv_init_iname, 1},
+	{{"Er", (sizeof("Er") - 1)}, /* */
+			PVT_OTHER, pv_get_escstr, 0, 0, 0, pv_init_iname, 2},
+	{{"Es", (sizeof("Es") - 1)}, /* */
+			PVT_OTHER, pv_get_escstr, 0, 0, 0, pv_init_iname, 4},
+	{{"Et", (sizeof("Et") - 1)}, /* */
+			PVT_OTHER, pv_get_escstr, 0, 0, 0, pv_init_iname, 3},
+	{{"Ec", (sizeof("Ec") - 1)}, /* */
+			PVT_OTHER, pv_get_escstr, 0, 0, 0, pv_init_iname, 5},
+	{{"Eq", (sizeof("Eq") - 1)}, /* */
+			PVT_OTHER, pv_get_escstr, 0, 0, 0, pv_init_iname, 6},
+	{{"Ek", (sizeof("Ek") - 1)}, /* */
+			PVT_OTHER, pv_get_escstr, 0, 0, 0, pv_init_iname, 7},
+	{{"Ei", (sizeof("Ei") - 1)}, /* */
+			PVT_OTHER, pv_get_escstr, 0, 0, 0, pv_init_iname, 8},
+	{{"Ej", (sizeof("Ej") - 1)}, /* */
+			PVT_OTHER, pv_get_escstr, 0, 0, 0, pv_init_iname, 9},
+	{{"Eb", (sizeof("Eb") - 1)}, /* */
+			PVT_OTHER, pv_get_escstr, 0, 0, 0, pv_init_iname, 10},
+	{{"Ev", (sizeof("Ev") - 1)}, /* */
+			PVT_OTHER, pv_get_escstr, 0, 0, 0, pv_init_iname, 11},
 	{{"fd", (sizeof("fd") - 1)}, /* */
 			PVT_OTHER, pv_get_from_attr, pv_set_from_domain, 0, 0,
 			pv_init_iname, 3},
