@@ -8,7 +8,6 @@
 %bcond_without cnxcc
 %bcond_with dnssec
 %bcond_without evapi
-%bcond_without geoip
 %bcond_without http_async_client
 %bcond_without ims
 %bcond_without jansson
@@ -45,7 +44,6 @@
 %bcond_without cnxcc
 %bcond_with dnssec
 %bcond_without evapi
-%bcond_without geoip
 %bcond_without http_async_client
 %bcond_without ims
 %bcond_without jansson
@@ -92,7 +90,6 @@
 %bcond_without cnxcc
 %bcond_with dnssec
 %bcond_without evapi
-%bcond_without geoip
 %bcond_without http_async_client
 %bcond_without ims
 %bcond_without jansson
@@ -139,7 +136,6 @@
 %bcond_without cnxcc
 %bcond_with dnssec
 %bcond_without evapi
-%bcond_without geoip
 %bcond_without http_async_client
 %bcond_without ims
 %bcond_without jansson
@@ -169,7 +165,6 @@
 %bcond_without cnxcc
 %bcond_with dnssec
 %bcond_with evapi
-%bcond_without geoip
 %bcond_without http_async_client
 %bcond_without ims
 %bcond_without jansson
@@ -466,16 +461,14 @@ suspended when sending the event, to be resumed at a later point, maybe triggere
 %endif
 
 
-%if %{with geoip}
 %package    geoip
 Summary:    MaxMind GeoIP support for Kamailio
 Group:      %{PKGGROUP}
-Requires:   GeoIP, libmaxminddb, kamailio = %ver
-BuildRequires:  GeoIP-devel, libmaxminddb-devel
+Requires:   libmaxminddb, kamailio = %ver
+BuildRequires:  libmaxminddb-devel
 
 %description    geoip
 MaxMind GeoIP support for Kamailio.
-%endif
 
 
 %package    gzcompress
@@ -1226,10 +1219,7 @@ make every-module skip_modules="app_mono db_cassandra db_oracle iptrtpproxy \
 %if %{with evapi}
     kev \
 %endif
-%if %{with geoip}
-    kgeoip \
     kgeoip2 \
-%endif
     kgzcompress \
 %if %{with http_async_client}
     khttp_async \
@@ -1325,7 +1315,7 @@ make install-modules-all skip_modules="app_mono db_cassandra db_oracle \
     FREERADIUS=1 \
 %endif
 %if 0%{?rhel} >= 8
-    PYTHON3=python3.9 \
+    PYTHON3=python3.12 \
 %endif
     WOLFSSL_INTERNAL=no \
     group_include="kstandard kautheph kberkeley kcarrierroute \
@@ -1339,10 +1329,7 @@ make install-modules-all skip_modules="app_mono db_cassandra db_oracle \
 %if %{with evapi}
     kev \
 %endif
-%if %{with geoip}
-    kgeoip \
     kgeoip2 \
-%endif
     kgzcompress \
 %if %{with http_async_client}
     khttp_async \
@@ -1935,14 +1922,10 @@ fi
 %endif
 
 
-%if %{with geoip}
 %files      geoip
 %defattr(-,root,root)
-%doc %{_docdir}/kamailio/modules/README.geoip
 %doc %{_docdir}/kamailio/modules/README.geoip2
-%{_libdir}/kamailio/modules/geoip.so
 %{_libdir}/kamailio/modules/geoip2.so
-%endif
 
 
 %files      gzcompress
@@ -1980,6 +1963,7 @@ fi
 %doc %{_docdir}/kamailio/modules/README.ims_isc
 %doc %{_docdir}/kamailio/modules/README.ims_ocs
 %doc %{_docdir}/kamailio/modules/README.ims_qos
+%doc %{_docdir}/kamailio/modules/README.ims_qos_npn
 %doc %{_docdir}/kamailio/modules/README.ims_registrar_pcscf
 %doc %{_docdir}/kamailio/modules/README.ims_registrar_scscf
 %doc %{_docdir}/kamailio/modules/README.ims_usrloc_pcscf
@@ -1995,6 +1979,7 @@ fi
 %{_libdir}/kamailio/modules/ims_isc.so
 %{_libdir}/kamailio/modules/ims_ocs.so
 %{_libdir}/kamailio/modules/ims_qos.so
+%{_libdir}/kamailio/modules/ims_qos_npn.so
 %{_libdir}/kamailio/modules/ims_registrar_pcscf.so
 %{_libdir}/kamailio/modules/ims_registrar_scscf.so
 %{_libdir}/kamailio/modules/ims_usrloc_pcscf.so
