@@ -594,6 +594,16 @@ int tps_storage_record(sip_msg_t *msg, tps_data_t *td, int dialog, int dir)
 	str suid;
 	str *sx = NULL;
 
+	if(parse_headers(msg, HDR_EOH_F, 0) == -1) {
+		return -1;
+	}
+
+	if(get_cseq(msg)->method_id == METHOD_ACK) {
+		if(parse_headers(msg, HDR_CONTACT_F, 0) < 0 || msg->contact == NULL) {
+			/* ACK with no Contact - nothing to store */
+			return 0;
+		}
+	}
 	if(_tps_context_value.len > 0) {
 		sx = &_tps_context_value;
 	} else if(_tps_context_param.len > 0) {
@@ -643,7 +653,8 @@ int tps_storage_record(sip_msg_t *msg, tps_data_t *td, int dialog, int dir)
 	return 0;
 
 error:
-	LM_ERR("failed to store\n");
+	LM_ERR("failed to store (dlg: %d dir: %d metid: %d)\n", dialog, dir,
+			get_cseq(msg)->method_id);
 	return ret;
 }
 
